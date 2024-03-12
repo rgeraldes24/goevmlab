@@ -26,8 +26,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/theQRL/go-zond/log"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 // ErigonVM is s Evm-interface wrapper around the eroigon `evm` binary

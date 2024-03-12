@@ -22,10 +22,10 @@ import (
 	"math/rand"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto/bls12381"
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/goevmlab/program"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/program"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/crypto/bls12381"
 )
 
 var modulo, _ = big.NewInt(0).SetString("0x1a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab", 0)

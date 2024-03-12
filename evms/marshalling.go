@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
+	"github.com/theQRL/go-zond/common/hexutil"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 func JsonMarshal(log *logger.StructLog) []byte {

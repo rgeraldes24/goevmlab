@@ -26,8 +26,8 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/theQRL/go-zond/log"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 // GethEVM is s Evm-interface wrapper around the `evm` binary, based on go-ethereum.
@@ -136,7 +136,7 @@ func (evm *GethEVM) copyUntilEnd(out io.Writer, input io.Reader) stateRoot {
 	scanner.Buffer(buf, 32*1024*1024)
 	// When geth encounters an error, it may already have spat out the info, prematurely.
 	// We need to merge it back to one item
-	// https://github.com/ethereum/go-ethereum/pull/23970#issuecomment-979851712
+	// https://github.com/theQRL/go-zond/pull/23970#issuecomment-979851712
 	var prev *logger.StructLog
 	var yield = func(current *logger.StructLog) {
 		if prev == nil {

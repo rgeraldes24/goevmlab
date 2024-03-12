@@ -23,9 +23,9 @@ import (
 	"path/filepath"
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/holiman/goevmlab/common"
-	"github.com/holiman/goevmlab/fuzzing"
+	"github.com/rgeraldes24/goevmlab/common"
+	"github.com/rgeraldes24/goevmlab/fuzzing"
+	"github.com/theQRL/go-zond/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -61,11 +61,11 @@ func initApp() *cli.App {
 }
 
 func main() {
-	log.SetDefault(log.NewLogger(log.NewTerminalHandlerWithLevel(os.Stderr, log.LevelInfo, true)))
-	if err := app.Run(os.Args); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
+	// log.SetDefault(log.NewLogger(log.NewTerminalHandlerWithLevel(os.Stderr, log.LevelInfo, true)))
+	// if err := app.Run(os.Args); err != nil {
+	// 	fmt.Fprintln(os.Stderr, err)
+	// 	os.Exit(1)
+	// }
 }
 
 func startFuzzer(ctx *cli.Context) error {

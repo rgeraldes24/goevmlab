@@ -22,9 +22,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/holiman/goevmlab/ops"
 	"os"
+
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/theQRL/go-zond/common"
 )
 
 var (

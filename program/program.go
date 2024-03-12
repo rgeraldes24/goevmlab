@@ -18,11 +18,12 @@ package program
 
 import (
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/uint256"
 	"math/big"
+
+	"github.com/holiman/uint256"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/core/vm"
 )
 
 type Program struct {

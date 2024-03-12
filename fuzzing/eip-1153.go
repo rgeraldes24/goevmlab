@@ -19,8 +19,8 @@ package fuzzing
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/common/hexutil"
 )
 
 func fillTstore(gst *GstMaker, fork string) {

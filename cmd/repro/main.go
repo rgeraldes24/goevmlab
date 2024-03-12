@@ -22,11 +22,11 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/holiman/goevmlab/common"
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/goevmlab/program"
-	"github.com/holiman/goevmlab/traces"
+	"github.com/rgeraldes24/goevmlab/common"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/program"
+	"github.com/rgeraldes24/goevmlab/traces"
+	"github.com/theQRL/go-zond/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -43,11 +43,11 @@ func initApp() *cli.App {
 var app = initApp()
 
 func main() {
-	log.SetDefault(log.NewLogger(log.NewTerminalHandlerWithLevel(os.Stderr, log.LevelInfo, true)))
-	if err := app.Run(os.Args); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
+	// log.SetDefault(log.NewLogger(log.NewTerminalHandlerWithLevel(os.Stderr, log.LevelInfo, true)))
+	// if err := app.Run(os.Args); err != nil {
+	// 	fmt.Fprintln(os.Stderr, err)
+	// 	os.Exit(1)
+	// }
 }
 
 func startAnalysis(c *cli.Context) error {

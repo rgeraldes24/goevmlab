@@ -22,8 +22,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/holiman/goevmlab/traces"
-	"github.com/holiman/goevmlab/ui"
+	"github.com/rgeraldes24/goevmlab/traces"
+	"github.com/rgeraldes24/goevmlab/ui"
 )
 
 func init() {

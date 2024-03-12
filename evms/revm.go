@@ -16,6 +16,7 @@
 
 package evms
 
+/*
 import (
 	"bufio"
 	"bytes"
@@ -26,13 +27,13 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/log"
 	"github.com/holiman/uint256"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/common/hexutil"
+	"github.com/theQRL/go-zond/common/math"
+	"github.com/theQRL/go-zond/core/vm"
+	"github.com/theQRL/go-zond/log"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 type RethVM struct {
@@ -217,3 +218,4 @@ func (evm *RethVM) Copy(out io.Writer, input io.Reader) {
 func (evm *RethVM) Stats() []any {
 	return evm.stats.Stats()
 }
+*/

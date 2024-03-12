@@ -18,11 +18,12 @@ package common
 
 import (
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/tracers"
 	"math/big"
 	"strings"
+
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/core/vm"
+	"github.com/theQRL/go-zond/zond/tracers"
 )
 
 var (

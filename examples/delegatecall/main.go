@@ -23,17 +23,16 @@ import (
 	"os"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/core/vm/runtime"
-	"github.com/ethereum/go-ethereum/params"
-	common2 "github.com/holiman/goevmlab/common"
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/goevmlab/program"
-	"github.com/holiman/uint256"
+	common2 "github.com/rgeraldes24/goevmlab/common"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/program"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/core"
+	"github.com/theQRL/go-zond/core/rawdb"
+	"github.com/theQRL/go-zond/core/state"
+	"github.com/theQRL/go-zond/core/vm"
+	"github.com/theQRL/go-zond/core/vm/runtime"
+	"github.com/theQRL/go-zond/params"
 )
 
 func main() {
@@ -59,13 +58,13 @@ func runit() error {
 	b.Op(ops.ISZERO)
 	bBytes := b.Bytecode()
 
-	alloc := make(types.GenesisAlloc)
-	alloc[aAddr] = types.Account{
+	alloc := make(core.GenesisAlloc)
+	alloc[aAddr] = core.GenesisAccount{
 		Nonce:   0,
 		Code:    a.Bytecode(),
 		Balance: big.NewInt(0xffffffff),
 	}
-	alloc[bAddr] = types.Account{
+	alloc[bAddr] = core.GenesisAccount{
 		Nonce:   0,
 		Code:    bBytes,
 		Balance: big.NewInt(0),
@@ -89,12 +88,13 @@ func runit() error {
 		statedb.SetCode(addr, acc.Code)
 		statedb.SetNonce(addr, acc.Nonce)
 		if acc.Balance != nil {
-			statedb.SetBalance(addr, uint256.MustFromBig(acc.Balance))
+			statedb.SetBalance(addr, acc.Balance)
 		}
 
 	}
 	statedb.CreateAccount(sender)
-	statedb.SetBalance(sender, uint256.NewInt(0xfffffffffffffff))
+	// TODO(rgeraldes24)
+	// statedb.SetBalance(sender, uint256.NewInt(0xfffffffffffffff))
 
 	runtimeConfig := runtime.Config{
 		Value:       big.NewInt(0x1337),

@@ -19,23 +19,23 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/holiman/goevmlab/fuzzing"
 	"math/big"
 	"os"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/core/vm/runtime"
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/goevmlab/program"
-	"github.com/holiman/uint256"
+	"github.com/rgeraldes24/goevmlab/fuzzing"
+	"github.com/theQRL/go-zond/common/hexutil"
+	"github.com/theQRL/go-zond/core"
+
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/program"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/core/rawdb"
+	"github.com/theQRL/go-zond/core/state"
+	"github.com/theQRL/go-zond/core/vm"
+	"github.com/theQRL/go-zond/core/vm/runtime"
+	"github.com/theQRL/go-zond/params"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 // This program creates a testcase surrounding selfdestruct in the context of
@@ -114,26 +114,26 @@ func runit() error {
 		caller.Op(ops.POP)                         // Ignore returnvalue
 	}
 	// Set up a genesis
-	alloc := make(types.GenesisAlloc)
+	alloc := make(core.GenesisAlloc)
 	// Create those that are supposed to exist
 	for _, addr := range existingAddresses {
-		alloc[addr] = types.Account{
+		alloc[addr] = core.GenesisAccount{
 			Nonce:   1,
 			Balance: big.NewInt(0),
 		}
 	}
 
-	alloc[destAddr] = types.Account{
+	alloc[destAddr] = core.GenesisAccount{
 		Nonce:   1,
 		Code:    destructor.Bytecode(),
 		Balance: big.NewInt(0x1),
 	}
-	alloc[callerAddr] = types.Account{
+	alloc[callerAddr] = core.GenesisAccount{
 		Nonce:   1,
 		Code:    caller.Bytecode(),
 		Balance: big.NewInt(0x1),
 	}
-	alloc[sender] = types.Account{
+	alloc[sender] = core.GenesisAccount{
 		Nonce:   0,
 		Balance: big.NewInt(1000000000000000000), // 1 eth
 	}
@@ -155,7 +155,7 @@ func runit() error {
 		statedb.SetCode(addr, acc.Code)
 		statedb.SetNonce(addr, acc.Nonce)
 		if acc.Balance != nil {
-			statedb.SetBalance(addr, uint256.MustFromBig(acc.Balance))
+			statedb.SetBalance(addr, acc.Balance)
 		}
 
 	}

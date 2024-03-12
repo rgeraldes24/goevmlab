@@ -3,8 +3,9 @@ package evms
 import (
 	"time"
 
-	"github.com/holiman/goevmlab/utils"
 	"sync/atomic"
+
+	"github.com/rgeraldes24/goevmlab/utils"
 )
 
 type VmStat struct {

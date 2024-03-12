@@ -21,8 +21,8 @@ import (
 	"strings"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/goevmlab/traces"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/traces"
 	"github.com/rivo/tview"
 )
 

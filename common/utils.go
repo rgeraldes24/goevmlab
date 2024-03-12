@@ -38,13 +38,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/holiman/goevmlab/evms"
-	"github.com/holiman/goevmlab/fuzzing"
-	"github.com/holiman/goevmlab/utils"
+	"github.com/rgeraldes24/goevmlab/evms"
+	"github.com/rgeraldes24/goevmlab/fuzzing"
+	"github.com/rgeraldes24/goevmlab/utils"
+	"github.com/theQRL/go-zond/common"
+	"github.com/theQRL/go-zond/common/hexutil"
+	"github.com/theQRL/go-zond/core"
+	"github.com/theQRL/go-zond/log"
 	"github.com/urfave/cli/v2"
 )
 
@@ -151,7 +151,7 @@ func initVMs(c *cli.Context) []evms.Evm {
 		erigonBatchBins = c.StringSlice(ErigonBatchFlag.Name)
 		nimBins         = c.StringSlice(NimbusFlag.Name)
 		evmoneBins      = c.StringSlice(EvmoneFlag.Name)
-		revmBins        = c.StringSlice(RethFlag.Name)
+		// revmBins        = c.StringSlice(RethFlag.Name)
 
 		vms []evms.Evm
 	)
@@ -185,9 +185,9 @@ func initVMs(c *cli.Context) []evms.Evm {
 	for i, bin := range evmoneBins {
 		vms = append(vms, evms.NewEvmoneVM(bin, fmt.Sprintf("%d", i)))
 	}
-	for i, bin := range revmBins {
-		vms = append(vms, evms.NewRethVM(bin, fmt.Sprintf("%d", i)))
-	}
+	// for i, bin := range revmBins {
+	// 	vms = append(vms, evms.NewRethVM(bin, fmt.Sprintf("%d", i)))
+	// }
 	return vms
 
 }
@@ -777,7 +777,7 @@ func (meta *testMeta) fuzzingLoop(skipTrace bool, clientCount int) {
 }
 
 // ConvertToStateTest is a utility to turn stuff into sharable state tests.
-func ConvertToStateTest(name, fork string, alloc types.GenesisAlloc, gasLimit uint64, target common.Address) error {
+func ConvertToStateTest(name, fork string, alloc core.GenesisAlloc, gasLimit uint64, target common.Address) error {
 
 	mkr := fuzzing.BasicStateTest(fork)
 	// convert the genesisAlloc

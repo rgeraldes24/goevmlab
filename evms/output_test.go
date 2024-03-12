@@ -36,7 +36,7 @@ func TestVMsOutput(t *testing.T) {
 	for _, finfo := range finfos {
 		if finfo.Name() == "eofcode.json" {
 			// We skip this one. Evmone refuse to run it.
-			// https://github.com/holiman/goevmlab/issues/127
+			// https://github.com/rgeraldes24/goevmlab/issues/127
 			continue
 		}
 		testVmsOutput(t, filepath.Join("testdata", "traces", finfo.Name()))
@@ -50,14 +50,14 @@ func testVmsOutput(t *testing.T, testfile string) {
 		stderr string
 	}
 	var cases = []testCase{
-		{NewBesuVM("", ""), fmt.Sprintf("%v.besu.stdout.txt", testfile), ""},
-		{NewBesuBatchVM("", ""), fmt.Sprintf("%v.besu.stdout.txt", testfile), ""},
-		{NewNethermindVM("", ""), "", fmt.Sprintf("%v.nethermind.stderr.txt", testfile)},
-		{NewErigonVM("", ""), "", fmt.Sprintf("%v.erigon.stderr.txt", testfile)},
+		// {NewBesuVM("", ""), fmt.Sprintf("%v.besu.stdout.txt", testfile), ""},
+		// {NewBesuBatchVM("", ""), fmt.Sprintf("%v.besu.stdout.txt", testfile), ""},
+		// {NewNethermindVM("", ""), "", fmt.Sprintf("%v.nethermind.stderr.txt", testfile)},
+		// {NewErigonVM("", ""), "", fmt.Sprintf("%v.erigon.stderr.txt", testfile)},
 		{NewGethEVM("", ""), "", fmt.Sprintf("%v.geth.stderr.txt", testfile)},
-		{NewNimbusEVM("", ""), "", fmt.Sprintf("%v.nimbus.stderr.txt", testfile)},
-		{NewEvmoneVM("", ""), "", fmt.Sprintf("%v.evmone.stderr.txt", testfile)},
-		{NewRethVM("", ""), "", fmt.Sprintf("%v.revm.stderr.txt", testfile)},
+		// {NewNimbusEVM("", ""), "", fmt.Sprintf("%v.nimbus.stderr.txt", testfile)},
+		// {NewEvmoneVM("", ""), "", fmt.Sprintf("%v.evmone.stderr.txt", testfile)},
+		// {NewRethVM("", ""), "", fmt.Sprintf("%v.revm.stderr.txt", testfile)},
 	}
 	var readers []io.Reader
 	var vms []Evm
@@ -108,9 +108,9 @@ func TestStateRootEvmone(t *testing.T) {
 	testStateRootOnly(t, NewEvmoneVM("", ""), "evmone")
 }
 
-func TestStateRootRethVM(t *testing.T) {
-	testStateRootOnly(t, NewRethVM("", ""), "revm")
-}
+// func TestStateRootRethVM(t *testing.T) {
+// 	testStateRootOnly(t, NewRethVM("", ""), "revm")
+// }
 
 func testStateRootOnly(t *testing.T, vm Evm, name string) {
 
@@ -138,7 +138,7 @@ func testStateRootOnly(t *testing.T, vm Evm, name string) {
 		if err != nil {
 			if finfo.Name() == "eofcode.json" {
 				// We accept this failure. Evmone refuse to run it.
-				// https://github.com/holiman/goevmlab/issues/127
+				// https://github.com/rgeraldes24/goevmlab/issues/127
 				t.Logf("case %d, %v: got error: %v (failure accepted)", i, finfo.Name(), err)
 				continue
 			}

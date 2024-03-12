@@ -23,7 +23,7 @@ FROM golang:latest as golang-builder
 # Go-evmlab
 #
 
-RUN git clone https://github.com/holiman/goevmlab --depth 1
+RUN git clone https://github.com/rgeraldes24/goevmlab --depth 1
 RUN cd goevmlab && \
   go build ./cmd/generic-fuzzer && \
   go build ./cmd/checkslow && \
@@ -37,7 +37,7 @@ RUN cd goevmlab && \
 # GETH
 #
 
-RUN git clone https://github.com/ethereum/go-ethereum --depth 1
+RUN git clone https://github.com/theQRL/go-zond --depth 1
 RUN cd go-ethereum && go run build/ci.go install -static ./cmd/evm
 
 #

@@ -18,14 +18,13 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
-
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/holiman/goevmlab/common"
-	"github.com/urfave/cli/v2"
-	"io"
 	"sync/atomic"
+
+	"github.com/rgeraldes24/goevmlab/common"
+	"github.com/urfave/cli/v2"
 )
 
 var app = initApp()
@@ -43,11 +42,11 @@ func initApp() *cli.App {
 }
 
 func main() {
-	log.SetDefault(log.NewLogger(log.NewTerminalHandlerWithLevel(os.Stderr, log.LevelInfo, true)))
-	if err := app.Run(os.Args); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
+	// log.SetDefault(log.NewLogger(log.NewTerminalHandlerWithLevel(os.Stderr, log.LevelInfo, true)))
+	// if err := app.Run(os.Args); err != nil {
+	// 	fmt.Fprintln(os.Stderr, err)
+	// 	os.Exit(1)
+	// }
 }
 
 func startFuzzer(c *cli.Context) error {

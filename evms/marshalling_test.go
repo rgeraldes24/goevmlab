@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
 	"github.com/holiman/uint256"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 // Test that marshalling is valid json

@@ -20,7 +20,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/theQRL/go-zond/core/vm"
 )
 
 // TestSanity checks the npops and npushes against the

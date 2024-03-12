@@ -25,9 +25,10 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/log"
 	"time"
+
+	"github.com/theQRL/go-zond/log"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 // NimbusEVM is s Evm-interface wrapper around the `evmstate` binary, based on nimbus-eth1.
@@ -125,7 +126,7 @@ func (evm *NimbusEVM) Copy(out io.Writer, input io.Reader) {
 
 	// When nimbus encounters an error, it may already have spat out the info prematurely.
 	// We need to merge it back to one item, just like geth
-	// https://github.com/ethereum/go-ethereum/pull/23970#issuecomment-979851712
+	// https://github.com/theQRL/go-zond/pull/23970#issuecomment-979851712
 	var prev *logger.StructLog
 	var yield = func(current *logger.StructLog) {
 		if prev == nil {

@@ -11,7 +11,7 @@ r: 55066263022277343669578718895168534326250603453777594175500187360389116729240
 s: 48646907407867090349717708413934355199316407403948578780406752048212980396201
 msg: 6b8d2c81b11b2d699528dde488dbdf2f94293d0d33c32e347f255fa4a6c1f0a9
 
-- Geth fails (specifically, crypto.Ecrecover returns the err 'recovery failed' right here: https://github.com/ethereum/go-ethereum/blob/62ad17fb0046243255048fbf8cb0882f48d8d850/core/vm/contracts.go#L188).
+- Geth fails (specifically, crypto.Ecrecover returns the err 'recovery failed' right here: https://github.com/theQRL/go-zond/blob/62ad17fb0046243255048fbf8cb0882f48d8d850/core/vm/contracts.go#L188).
 - py-evm succeeds
 
 Tested on go-ethereum commit 62ad17fb0046243255048fbf8cb0882f48d8d850 (26 Aug 2021)
@@ -19,9 +19,9 @@ Tested on go-ethereum commit 62ad17fb0046243255048fbf8cb0882f48d8d850 (26 Aug 20
 package main
 
 import (
-"github.com/ethereum/go-ethereum/core/vm/runtime"
-"github.com/ethereum/go-ethereum/common"
-"github.com/ethereum/go-ethereum/params"
+"github.com/theQRL/go-zond/core/vm/runtime"
+"github.com/theQRL/go-zond/common"
+"github.com/theQRL/go-zond/params"
 "math/big"
 )
 

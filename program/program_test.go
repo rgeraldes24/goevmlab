@@ -20,8 +20,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/holiman/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/theQRL/go-zond/common"
 )
 
 func TestPush(t *testing.T) {

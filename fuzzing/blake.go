@@ -3,7 +3,7 @@ package fuzzing
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/theQRL/go-zond/common"
 )
 
 func fillBlake(gst *GstMaker, fork string) {

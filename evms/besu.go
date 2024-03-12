@@ -28,8 +28,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/theQRL/go-zond/log"
+	"github.com/theQRL/go-zond/zond/tracers/logger"
 )
 
 // BesuVM is s Evm-interface wrapper around the `evmtool` binary, based on Besu.

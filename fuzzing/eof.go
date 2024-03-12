@@ -21,8 +21,8 @@ import (
 	"math/big"
 	"math/rand"
 
-	"github.com/holiman/goevmlab/ops"
-	"github.com/holiman/goevmlab/program"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/program"
 )
 
 func oneOf(cases ...any) any {

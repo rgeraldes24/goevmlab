@@ -19,8 +19,8 @@ package main
 import (
 	"math/rand"
 
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/holiman/goevmlab/ops"
+	"github.com/rgeraldes24/goevmlab/ops"
+	"github.com/theQRL/go-zond/log"
 )
 
 type codeMutator struct {
