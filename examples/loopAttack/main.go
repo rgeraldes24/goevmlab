@@ -188,7 +188,6 @@ Fork: %v
 		Origin:      sender,
 		State:       statedb,
 		GasLimit:    gas,
-		Difficulty:  big.NewInt(0x200000),
 		BlockNumber: new(big.Int).SetUint64(1),
 		ChainConfig: ruleset,
 		EVMConfig: vm.Config{
