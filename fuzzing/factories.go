@@ -21,7 +21,6 @@ var fillers = map[string]func(*GstMaker, string){
 	"ecrecover":    fillEcRecover,
 	"naive":        fillNaive,
 	"blake":        fillBlake,
-	"bls":          fillBls,
 	"precompiles":  fillPrecompileTest,
 	"simpleops":    fillSimple,
 	"memops":       fillMemOps,
