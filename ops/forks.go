@@ -185,9 +185,7 @@ func LookupFork(fork string) *Fork {
 func LookupRules(fork string) params.Rules {
 	switch fork {
 	case "Shanghai":
-		return params.Rules{
-			IsShanghai: true,
-		}
+		return params.Rules{}
 	default:
 		panic(fmt.Sprintf("Unsupported: %v", fork))
 
@@ -197,8 +195,7 @@ func LookupRules(fork string) params.Rules {
 // LookupChainConfig returns the params.ChainConfig for a given fork.
 func LookupChainConfig(fork string) (*params.ChainConfig, error) {
 	var shanghai = &params.ChainConfig{
-		ChainID:      big.NewInt(1),
-		ShanghaiTime: new(uint64),
+		ChainID: big.NewInt(1),
 	}
 
 	switch fork {
