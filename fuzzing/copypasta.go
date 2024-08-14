@@ -52,10 +52,10 @@ func (ga *GenesisAlloc) UnmarshalJSON(data []byte) error {
 type GenesisAccount struct {
 	Code []byte `json:"code"`
 	// N.B: parity demands storage even if it's empty
-	Storage    map[common.Hash]common.Hash `json:"storage"`
-	Balance    *big.Int                    `json:"balance" gencodec:"required"`
-	Nonce      uint64                      `json:"nonce"`
-	PrivateKey []byte                      `json:"secretKey,omitempty"` // for tests
+	Storage map[common.Hash]common.Hash `json:"storage"`
+	Balance *big.Int                    `json:"balance" gencodec:"required"`
+	Nonce   uint64                      `json:"nonce"`
+	Seed    []byte                      `json:"seed,omitempty"` // for tests
 }
 
 type genesisAccountMarshaling struct {

@@ -148,14 +148,6 @@ func determineDestination(log *logger.StructLog, current *common.Address) (conte
 			callDest = &a
 			contextAddr = current
 		}
-	case vm.CALLCODE:
-		// The stack index is 1, but the actual execution context remains the same
-		name = "CCALL"
-		if len(log.Stack) > 1 {
-			a := common.Address(log.Stack[1].Bytes20())
-			callDest = &a
-			contextAddr = current
-		}
 	case vm.CREATE:
 		// In order to figure this out, we would need both nonce and current address
 		// while we _may_ have the address, we don't have the nonce

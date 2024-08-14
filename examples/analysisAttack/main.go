@@ -236,11 +236,11 @@ func convertToStateTest(name, fork string, alloc core.GenesisAlloc, gasLimit uin
 	var fuzzGenesisAlloc = make(fuzzing.GenesisAlloc)
 	for k, v := range alloc {
 		fuzzAcc := fuzzing.GenesisAccount{
-			Code:       v.Code,
-			Storage:    v.Storage,
-			Balance:    v.Balance,
-			Nonce:      v.Nonce,
-			PrivateKey: v.PrivateKey,
+			Code:    v.Code,
+			Storage: v.Storage,
+			Balance: v.Balance,
+			Nonce:   v.Nonce,
+			Seed:    v.Seed,
 		}
 		if fuzzAcc.Balance == nil {
 			fuzzAcc.Balance = new(big.Int)

@@ -80,4 +80,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/theQRL/go-zond => github.com/rgeraldes24/go-zond v0.0.0-20240405150831-9831d39dfb2e
+replace github.com/theQRL/go-zond => github.com/rgeraldes24/go-zond v0.0.0-20240814125945-0291ddb8dcb4
