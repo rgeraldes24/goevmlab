@@ -34,7 +34,7 @@ import (
 type GenesisAlloc map[common.Address]GenesisAccount
 
 func (ga *GenesisAlloc) UnmarshalJSON(data []byte) error {
-	m := make(map[common.UnprefixedAddress]GenesisAccount)
+	m := make(map[common.Address]GenesisAccount)
 	if err := json.Unmarshal(data, &m); err != nil {
 		return err
 	}
@@ -129,7 +129,6 @@ type stIndex struct {
 
 type stEnv struct {
 	Coinbase     common.Address `json:"currentCoinbase"   gencodec:"required"`
-	Difficulty   *big.Int       `json:"currentDifficulty" gencodec:"optional"`
 	Random       *common.Hash   `json:"currentRandom,omitempty"     gencodec:"optional"`
 	GasLimit     uint64         `json:"currentGasLimit"   gencodec:"required"`
 	Number       uint64         `json:"currentNumber"     gencodec:"required"`
@@ -139,13 +138,12 @@ type stEnv struct {
 }
 
 type stEnvMarshaling struct {
-	Coinbase   common.UnprefixedAddress
-	Difficulty *math.HexOrDecimal256
-	Random     *common.Hash
-	GasLimit   math.HexOrDecimal64
-	Number     math.HexOrDecimal64
-	Timestamp  math.HexOrDecimal64
-	BaseFee    *math.HexOrDecimal256
+	Coinbase  common.Address
+	Random    *common.Hash
+	GasLimit  math.HexOrDecimal64
+	Number    math.HexOrDecimal64
+	Timestamp math.HexOrDecimal64
+	BaseFee   *math.HexOrDecimal256
 }
 
 //go:generate gencodec -type StTransaction -field-override stTransactionMarshaling -out gen_sttransaction.go

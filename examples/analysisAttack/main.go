@@ -120,9 +120,9 @@ func evaluate(ctx *cli.Context) error {
 		initcode = common.HexToHash(fmt.Sprintf("0x62%v565b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
 			strconv.FormatInt(int64(initCodeSize-1), 16)))
 		// Where the payload resides
-		payloadAddr = common.HexToAddress("0xc0de")
+		payloadAddr, _ = common.NewAddressFromString("Z000000000000000000000000000000000000c0de")
 		// The attacker code
-		attackerAddr = common.HexToAddress("0x31337")
+		attackerAddr, _ = common.NewAddressFromString("Z0000000000000000000000000000000000031337")
 	)
 	ruleset, err := ops.LookupChainConfig(fork)
 	if err != nil {
@@ -251,7 +251,7 @@ func convertToStateTest(name, fork string, alloc core.GenesisAlloc, gasLimit uin
 		fuzzGenesisAlloc[k] = fuzzAcc
 	}
 	// Also add the sender
-	var sender = common.HexToAddress("a94f5374fce5edbc8e2a8697c15331677e6ebf0b")
+	var sender, _ = common.NewAddressFromString("Za94f5374fce5edbc8e2a8697c15331677e6ebf0b")
 	if _, ok := fuzzGenesisAlloc[sender]; !ok {
 		fuzzGenesisAlloc[sender] = fuzzing.GenesisAccount{
 			Balance: big.NewInt(1000000000000000000), // 1 eth

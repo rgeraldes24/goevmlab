@@ -28,7 +28,10 @@ import (
 
 func fillEcRecover(gst *GstMaker, fork string) {
 	// Add a contract which calls BLS
-	dest := common.HexToAddress("0x00ca11ec5ec04e5")
+	dest, err := common.NewAddressFromString("Z000000000000000000000000000ca11ec5ec04e5")
+	if err != nil {
+		panic(err)
+	}
 	gst.AddAccount(dest, GenesisAccount{
 		Code:    randCallECRecover(),
 		Balance: new(big.Int),

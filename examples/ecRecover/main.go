@@ -73,7 +73,7 @@ func runit() error {
 	a.Op(ops.MLOAD)
 	a.Push(0)
 	a.Op(ops.SSTORE)
-	aAddr := common.HexToAddress("0xff0a")
+	aAddr, _ := common.NewAddressFromString("Z000000000000000000000000000000000000ff0a")
 	alloc := make(core.GenesisAlloc)
 	alloc[aAddr] = core.GenesisAccount{
 		Nonce:   0,
@@ -82,7 +82,7 @@ func runit() error {
 	}
 	var (
 		statedb, _ = state.New(common.Hash{}, state.NewDatabase(rawdb.NewMemoryDatabase()), nil)
-		sender     = common.HexToAddress("a94f5374fce5edbc8e2a8697c15331677e6ebf0b")
+		sender, _  = common.NewAddressFromString("Za94f5374fce5edbc8e2a8697c15331677e6ebf0b")
 	)
 	for addr, acc := range alloc {
 		statedb.CreateAccount(addr)

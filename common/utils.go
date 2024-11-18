@@ -799,7 +799,10 @@ func ConvertToStateTest(name, fork string, alloc core.GenesisAlloc, gasLimit uin
 		fuzzGenesisAlloc[k] = fuzzAcc
 	}
 	// Also add the sender
-	var sender = common.HexToAddress("a94f5374fce5edbc8e2a8697c15331677e6ebf0b")
+	var sender, err = common.NewAddressFromString("Za94f5374fce5edbc8e2a8697c15331677e6ebf0b")
+	if err != nil {
+		return err
+	}
 	if _, ok := fuzzGenesisAlloc[sender]; !ok {
 		fuzzGenesisAlloc[sender] = fuzzing.GenesisAccount{
 			Balance: big.NewInt(1000000000000000000), // 1 eth

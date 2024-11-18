@@ -46,7 +46,7 @@ func main() {
 func runit() error {
 	a := program.NewProgram()
 
-	aAddr := common.HexToAddress("0xff0a")
+	aAddr, _ := common.NewAddressFromString("Z000000000000000000000000000000000000ff0a")
 
 	/*
 		nop

@@ -27,7 +27,7 @@ import (
 )
 
 func fillSimple(gst *GstMaker, fork string) {
-	dest := common.HexToAddress("0xd0de")
+	dest, _ := common.NewAddressFromString("Z000000000000000000000000000000000000d0de")
 	forkDef := ops.LookupFork(fork)
 	if forkDef == nil {
 		panic(fmt.Sprintf("bad fork %v", fork))
@@ -52,7 +52,7 @@ func fillSimple(gst *GstMaker, fork string) {
 }
 
 func fillMemOps(gst *GstMaker, fork string) {
-	dest := common.HexToAddress("0xd0de")
+	dest, _ := common.NewAddressFromString("Z000000000000000000000000000000000000d0de")
 	gst.AddAccount(dest, GenesisAccount{
 		Code:    generateMemoryInteractingOpsProgram(fork),
 		Balance: new(big.Int),
@@ -138,7 +138,6 @@ var memOps = []ops.OpCode{
 	ops.RETURNDATACOPY,
 	ops.MLOAD,
 	ops.MSTORE,
-	ops.MCOPY,
 	ops.MSTORE8,
 	ops.RETURN,
 	ops.REVERT,

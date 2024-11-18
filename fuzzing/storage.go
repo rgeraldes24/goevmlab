@@ -105,7 +105,7 @@ func randCall2200(addresses []common.Address, depth int) []byte {
 			p.CreateAndCall(ctor.Bytecode(), r%2 == 0, randCallType())
 		case r < 95:
 			p.Push(addrGen())
-			p.Op(ops.SELFDESTRUCT)
+			// p.Op(ops.SELFDESTRUCT)
 		default:
 			p.Push(32) //len
 			p.Push(0)  //offset

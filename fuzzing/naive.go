@@ -10,9 +10,10 @@ import (
 )
 
 func fillNaive(gst *GstMaker, fork string) {
+	addr, _ := common.NewAddressFromString("Z00000000000000000000000000000000000000F1")
 	// The accounts which we want to be able to invoke
 	addrs := []common.Address{
-		common.HexToAddress("0xF1"),
+		addr,
 	}
 	forkDef := ops.LookupFork(fork)
 	if forkDef == nil {

@@ -42,7 +42,6 @@ func (op OpCode) HasImmediate() bool {
 func (op OpCode) IsCall() bool {
 	return op == CALL ||
 		op == DELEGATECALL ||
-		op == CALLCODE ||
 		op == STATICCALL
 
 }
@@ -116,13 +115,11 @@ const (
 	COINBASE    = OpCode(0x41)
 	TIMESTAMP   = OpCode(0x42)
 	NUMBER      = OpCode(0x43)
-	DIFFICULTY  = OpCode(0x44)
+	PREVRANDAO  = OpCode(0x44)
 	GASLIMIT    = OpCode(0x45)
 	CHAINID     = OpCode(0x46)
 	SELFBALANCE = OpCode(0x47)
 	BASEFEE     = OpCode(0x48)
-	BLOBHASH    = OpCode(0x49)
-	BLOBBASEFEE = OpCode(0x4a)
 )
 
 // 0x50 range - 'storage' and execution.
@@ -140,15 +137,7 @@ const (
 	GAS      = OpCode(0x5A)
 	JUMPDEST = OpCode(0x5B)
 
-	//RJUMP  = OpCode(0x5c) // Cancun
-	//RJUMPI = OpCode(0x5d) // Cancun
-	//RJUMPV = OpCode(0x5e) // Cancun
-
-	TLOAD  = OpCode(0x5c) // Cancun
-	TSTORE = OpCode(0x5d) // Cancun
-	MCOPY  = OpCode(0x5e) // Cancun
-	PUSH0  = OpCode(0x5f) // Shanghai
-
+	PUSH0 = OpCode(0x5f)
 )
 
 // 0x60 through 0x7F range.
@@ -246,16 +235,14 @@ const (
 const (
 	CREATE       = OpCode(0xf0)
 	CALL         = OpCode(0xf1)
-	CALLCODE     = OpCode(0xf2)
 	RETURN       = OpCode(0xf3)
 	DELEGATECALL = OpCode(0xf4)
 	CREATE2      = OpCode(0xf5)
 
 	STATICCALL = OpCode(0xfa)
 
-	INVALID      = OpCode(0xfe)
-	REVERT       = OpCode(0xfd)
-	SELFDESTRUCT = OpCode(0xff)
+	INVALID = OpCode(0xfe)
+	REVERT  = OpCode(0xfd)
 )
 
 func (op OpCode) String() string {
@@ -288,7 +275,6 @@ func init() {
 	}
 	// Add mapping for legacy opcode names
 	stringToOp["SHA3"] = KECCAK256
-	stringToOp["SUICIDE"] = SELFDESTRUCT
 }
 
 // StringToOp finds the opcode whose name is stored in `str`.
@@ -359,13 +345,11 @@ var opCodeInfo = map[OpCode]opInfo{
 	COINBASE:    {"COINBASE", nil, []string{"block miner address"}},
 	TIMESTAMP:   {"TIMESTAMP", nil, []string{"unix time of current block"}},
 	NUMBER:      {"NUMBER", nil, []string{"current block number"}},
-	DIFFICULTY:  {"DIFFICULTY", nil, []string{"current block difficulty"}},
+	PREVRANDAO:  {"PREVRANDAO", nil, []string{"prev randao"}},
 	GASLIMIT:    {"GASLIMIT", nil, []string{"block gas limit"}},
 	CHAINID:     {"CHAINID", nil, []string{"chain id"}},
 	SELFBALANCE: {"SELFBALANCE", nil, []string{"balance at current context"}},
 	BASEFEE:     {"BASEFEE", nil, []string{"basefee in current block"}},
-	BLOBHASH:    {"BLOBHASH", []string{"index"}, []string{"blobhash at index"}},
-	BLOBBASEFEE: {"BLOBBASEFEE", nil, []string{"blob basefee in current block"}},
 
 	POP:      {"POP", []string{"value to pop"}, nil},
 	MLOAD:    {"MLOAD", []string{"offset"}, []string{"value"}},
@@ -379,14 +363,7 @@ var opCodeInfo = map[OpCode]opInfo{
 	MSIZE:    {"MSIZE", nil, []string{"size of memory"}},
 	GAS:      {"GAS", nil, []string{"current gas remaining"}},
 	JUMPDEST: {"JUMPDEST", nil, nil},
-	MCOPY:    {"MCOPY", []string{"dest", "source", "length"}, nil},
-	TLOAD:    {"TLOAD", []string{"t-slot"}, []string{"value"}},
-	TSTORE:   {"TSTORE", []string{"t-slot", "value"}, nil},
 	PUSH0:    {"PUSH0", nil, []string{"zero"}},
-
-	//RJUMP:  {"RJUMP", nil, nil},
-	//RJUMPI: {"RJUMPI", []string{"cond"}, nil},
-	//RJUMPV: {"RJUMPV", []string{"case"}, nil},
 
 	// 0x60 through 0x7F range - push.
 	PUSH1:  {"PUSH1", nil, []string{"1 byte pushed value"}},
@@ -471,13 +448,11 @@ var opCodeInfo = map[OpCode]opInfo{
 	CREATE:       {"CREATE", []string{"value", "mem offset", "mem size"}, []string{"address or zero"}},
 	CALL:         {"CALL", []string{"gas", "address", "value", "in offset", "in size", "out offset", "out size"}, []string{"exitcode (1 for success)"}},
 	RETURN:       {"RETURN", []string{"offset", "size"}, nil},
-	CALLCODE:     {"CALLCODE", []string{"gas", "address", "value", "in offset", "in size", "out offset", "out size"}, []string{"exitcode (1 for success)"}},
 	DELEGATECALL: {"DELEGATECALL", []string{"gas", "address", "in offset", "in size", "out offset", "out size"}, []string{"exitcode (1 for success)"}},
 	CREATE2:      {"CREATE2", []string{"value", "mem offset", "mem size", "salt"}, []string{"address or zero"}},
 	STATICCALL:   {"STATICCALL", []string{"gas", "address", "in offset", "in size", "out offset", "out size"}, []string{"exitcode (1 for success)"}},
 	REVERT:       {"REVERT", []string{"offset", "size"}, nil},
 	INVALID:      {"INVALID", nil, nil},
-	SELFDESTRUCT: {"SELFDESTRUCT", []string{"beneficiary address"}, nil},
 }
 
 func (op OpCode) Pops() []string {
@@ -508,7 +483,7 @@ func (op OpCode) ExpandsMem() bool {
 	case KECCAK256, CALLDATALOAD, CALLDATASIZE, CALLDATACOPY, CODECOPY,
 		EXTCODECOPY, RETURNDATACOPY,
 		MLOAD, MSTORE, MSTORE8, LOG0, LOG1, LOG2, LOG3, LOG4,
-		CREATE, CALL, DELEGATECALL, CALLCODE, STATICCALL, RETURN, REVERT, CREATE2:
+		CREATE, CALL, DELEGATECALL, STATICCALL, RETURN, REVERT, CREATE2:
 		return true
 	default:
 		return false

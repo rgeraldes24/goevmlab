@@ -19,10 +19,10 @@ func main() {
 
 func makeTest() *fuzzing.GeneralStateTest {
 	gst := fuzzing.BasicStateTest("Berlin")
-	precompileAddress := common.HexToAddress("0x11")
+	precompileAddress, _ := common.NewAddressFromString("Z0000000000000000000000000000000000000011")
 
-	a := common.HexToAddress("0xaa")
-	b := common.HexToAddress("0xbb")
+	a, _ := common.NewAddressFromString("Z00000000000000000000000000000000000000aa")
+	b, _ := common.NewAddressFromString("Z00000000000000000000000000000000000000bb")
 	// 0xaa calls 0xbb, with exactly 0x2cef gas
 	{
 		aa := program.NewProgram()

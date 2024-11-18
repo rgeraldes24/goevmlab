@@ -141,7 +141,10 @@ func TestSecondTraceTxReading(t *testing.T) {
 	}
 
 	{
-		exp := common.HexToAddress("0x3c307fefd3d71c3ca8a3c26539ef4d47c61b6565")
+		exp, err := common.NewAddressFromString("Z3c307fefd3d71c3ca8a3c26539ef4d47c61b6565")
+		if err != nil {
+			t.Fatalf("err reading address: %v", err)
+		}
 		if got := traces.Get(157).address; got == nil || *got != exp {
 			t.Fatalf("op wrong, got %x, expected %x", got, exp)
 		}

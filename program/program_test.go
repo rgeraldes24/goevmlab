@@ -25,6 +25,11 @@ import (
 )
 
 func TestPush(t *testing.T) {
+	address0, err := common.NewAddressFromString("Zdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef")
+	if err != nil {
+		panic(err)
+	}
+
 	tests := []struct {
 		input    interface{}
 		expected string
@@ -38,7 +43,7 @@ func TestPush(t *testing.T) {
 		{big.NewInt(1), "6001"},
 		{big.NewInt(0xfff), "610fff"},
 		// Addresses
-		{common.HexToAddress("0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"), "73deadbeefdeadbeefdeadbeefdeadbeefdeadbeef"},
+		{address0, "73deadbeefdeadbeefdeadbeefdeadbeefdeadbeef"},
 		{&common.Address{}, "6000"},
 	}
 	for i, tc := range tests {
@@ -50,9 +55,13 @@ func TestPush(t *testing.T) {
 	}
 }
 func TestCall(t *testing.T) {
+	address1, err := common.NewAddressFromString("Z0000000000000000000000000000000000001337")
+	if err != nil {
+		panic(err)
+	}
 	{ // Nil gas
 		p := NewProgram()
-		p.Call(nil, common.HexToAddress("0x1337"), big.NewInt(1), 1, 2, 3, 4)
+		p.Call(nil, address1, big.NewInt(1), 1, 2, 3, 4)
 		exp := "600460036002600160016113375af1"
 		if got := p.Hex(); got != exp {
 			t.Errorf("got %v expected %v", got, exp)
@@ -60,7 +69,7 @@ func TestCall(t *testing.T) {
 	}
 	{ // Non nil gas
 		p := NewProgram()
-		p.Call(big.NewInt(0xffff), common.HexToAddress("0x1337"), big.NewInt(1), 1, 2, 3, 4)
+		p.Call(big.NewInt(0xffff), address1, big.NewInt(1), 1, 2, 3, 4)
 		exp := "6004600360026001600161133761fffff1"
 		if got := p.Hex(); got != exp {
 			t.Errorf("got %v expected %v", got, exp)

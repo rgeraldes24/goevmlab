@@ -46,8 +46,8 @@ func main() {
 func runit() error {
 	a := program.NewProgram()
 
-	aAddr := common.HexToAddress("0xff0a")
-	bAddr := common.HexToAddress("0xff0b")
+	aAddr, _ := common.NewAddressFromString("Z000000000000000000000000000000000000ff0a")
+	bAddr, _ := common.NewAddressFromString("Z000000000000000000000000000000000000ff0b")
 
 	// Callling contract : call contract B, modify storage, revert
 	a.DelegateCall(nil, 0xff0b, 0, 0, 0, 0)

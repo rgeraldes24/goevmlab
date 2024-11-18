@@ -52,7 +52,7 @@ input := []byte{
         GasLimit: 100000,
         GasPrice: new(big.Int).SetUint64(1),
         Time: new(big.Int).SetUint64(1548947453),
-        Difficulty: new(big.Int).SetUint64(2557722798171005),
+        Difficulty: new(big.Int).SetUint64(2557722798171005), // TODO(rgeraldes24)
     })
 }
 ```

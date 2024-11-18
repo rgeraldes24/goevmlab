@@ -23,36 +23,41 @@ import (
 	"github.com/theQRL/go-zond/common/hexutil"
 )
 
+func address(addr string) common.Address {
+	a, _ := common.NewAddressFromString(addr)
+	return a
+}
+
 func fillSstore(gst *GstMaker, fork string) {
 	// The accounts which we want to be able to invoke
 	addrs := []common.Address{
-		common.HexToAddress("0xF1"),
-		common.HexToAddress("0xF2"),
-		common.HexToAddress("0xF3"),
-		common.HexToAddress("0xF4"),
-		common.HexToAddress("0xF5"),
-		common.HexToAddress("0xF6"),
-		common.HexToAddress("0xF7"),
-		common.HexToAddress("0xF8"),
-		common.HexToAddress("0xF9"),
-		common.HexToAddress("0xFA"),
+		address("Z00000000000000000000000000000000000000F1"),
+		address("Z00000000000000000000000000000000000000F2"),
+		address("Z00000000000000000000000000000000000000F3"),
+		address("Z00000000000000000000000000000000000000F4"),
+		address("Z00000000000000000000000000000000000000F5"),
+		address("Z00000000000000000000000000000000000000F6"),
+		address("Z00000000000000000000000000000000000000F7"),
+		address("Z00000000000000000000000000000000000000F8"),
+		address("Z00000000000000000000000000000000000000F9"),
+		address("Z00000000000000000000000000000000000000FA"),
 	}
 	nonGenesisAddresses := []common.Address{
-		common.HexToAddress("0x00"),
-		common.HexToAddress("0x01"),
-		common.HexToAddress("0x02"),
-		common.HexToAddress("0x03"),
-		common.HexToAddress("0x04"),
-		common.HexToAddress("0x05"),
-		common.HexToAddress("0x06"),
-		common.HexToAddress("0x07"),
-		common.HexToAddress("0x08"),
-		common.HexToAddress("0x09"),
-		common.HexToAddress("0x0A"),
-		common.HexToAddress("0x0B"),
-		common.HexToAddress("0x0C"),
-		common.HexToAddress("0x0D"),
-		common.HexToAddress("0x0E"),
+		address("Z0000000000000000000000000000000000000000"),
+		address("Z0000000000000000000000000000000000000001"),
+		address("Z0000000000000000000000000000000000000002"),
+		address("Z0000000000000000000000000000000000000003"),
+		address("Z0000000000000000000000000000000000000004"),
+		address("Z0000000000000000000000000000000000000005"),
+		address("Z0000000000000000000000000000000000000006"),
+		address("Z0000000000000000000000000000000000000007"),
+		address("Z0000000000000000000000000000000000000008"),
+		address("Z0000000000000000000000000000000000000009"),
+		address("Z000000000000000000000000000000000000000A"),
+		address("Z000000000000000000000000000000000000000B"),
+		address("Z000000000000000000000000000000000000000C"),
+		address("Z000000000000000000000000000000000000000D"),
+		address("Z000000000000000000000000000000000000000E"),
 	}
 	var allAddrs []common.Address
 	allAddrs = append(allAddrs, addrs...)

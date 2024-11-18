@@ -36,7 +36,7 @@ import (
 const DisallowEOF = true
 
 // The sender
-var sender = common.HexToAddress("a94f5374fce5edbc8e2a8697c15331677e6ebf0b")
+var sender, _ = common.NewAddressFromString("Za94f5374fce5edbc8e2a8697c15331677e6ebf0b")
 var pKey = hexutil.MustDecode("0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8")
 
 // GstMaker is a construct to generate General State Tests
@@ -52,16 +52,16 @@ type GstMaker struct {
 func NewGstMaker() *GstMaker {
 	alloc := make(GenesisAlloc)
 	rnd := common.HexToHash("0x20000")
+	coinbase, _ := common.NewAddressFromString("Zb94f5374fce5edbc8e2a8697c15331677e6ebf0b")
 	gst := &GstMaker{
 		env: &stEnv{
 			// The ENV portion
-			Number:     1,
-			GasLimit:   0x26e1f476fe1e22,
-			Difficulty: big.NewInt(0x200000),
-			Random:     &rnd,
-			Coinbase:   common.HexToAddress("b94f5374fce5edbc8e2a8697c15331677e6ebf0b"),
-			Timestamp:  0x03e8,
-			BaseFee:    big.NewInt(0x10),
+			Number:    1,
+			GasLimit:  0x26e1f476fe1e22,
+			Random:    &rnd,
+			Coinbase:  coinbase,
+			Timestamp: 0x03e8,
+			BaseFee:   big.NewInt(0x10),
 			// Keccak256([]byte{'0'}) see https://github.com/hyperledger/besu/issues/5122
 			PreviousHash: common.HexToHash("0x044852b2a670ade5407e78fb2863c51de9fcb96542a07186fe3aeda6bb8a116d"),
 		},
@@ -88,7 +88,8 @@ func (g *GstMaker) AddAccount(address common.Address, a GenesisAccount) {
 
 // GetDestination returns the to- address from the tx
 func (g *GstMaker) GetDestination() common.Address {
-	return common.HexToAddress(g.tx.To)
+	a, _ := common.NewAddressFromString(g.tx.To)
+	return a
 }
 
 // SetCode sets the code at the given address (creating the account

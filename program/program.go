@@ -163,21 +163,6 @@ func (p *Program) StaticCall(gas *big.Int, address, inOffset, inSize, outOffset,
 	p.Op(ops.STATICCALL)
 }
 
-func (p *Program) CallCode(gas *big.Int, address, value, inOffset, inSize, outOffset, outSize interface{}) {
-	p.Push(outSize)
-	p.Push(outOffset)
-	p.Push(inSize)
-	p.Push(inOffset)
-	p.Push(value)
-	p.Push(address)
-	if gas == nil {
-		p.Op(ops.GAS)
-	} else {
-		p.pushBig(gas)
-	}
-	p.Op(ops.CALLCODE)
-}
-
 // Label returns the PC (of the next instruction)
 func (p *Program) Label() uint64 {
 	return uint64(len(p.code))
@@ -268,15 +253,6 @@ func (p *Program) Sstore(slot interface{}, value interface{}) {
 	p.Op(ops.SSTORE)
 }
 
-// Tstore stores the given byte array to the given t-slot.
-// OBS! Does not verify that the value indeed fits into 32 bytes
-// If it does not, it will panic later on via pushBig
-func (p *Program) Tstore(slot interface{}, value interface{}) {
-	p.Push(value)
-	p.Push(slot)
-	p.Op(ops.TSTORE)
-}
-
 func (p *Program) Return(offset, len uint32) {
 	p.Push(len)
 	p.Push(offset)
@@ -313,7 +289,7 @@ func (p *Program) CreateAndCall(code []byte, isCreate2 bool, callOp ops.OpCode) 
 	p.Push(0).Push(0) // mem out
 	p.Push(0).Push(0) // mem in
 	addrOffset := ops.DUP5
-	if callOp == ops.CALL || callOp == ops.CALLCODE {
+	if callOp == ops.CALL {
 		p.Push(0) // value
 		addrOffset = ops.DUP6
 	}

@@ -1,8 +1,8 @@
 module github.com/rgeraldes24/goevmlab
 
-go 1.21
+go 1.22
 
-toolchain go1.22.1
+toolchain go1.22.6
 
 require (
 	github.com/gdamore/tcell/v2 v2.7.0
@@ -80,4 +80,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/theQRL/go-zond => github.com/rgeraldes24/go-zond v0.0.0-20240814163510-4a969197d73d
+replace github.com/theQRL/go-zond => github.com/rgeraldes24/go-zond v0.0.0-20241117145719-5b35e450b184

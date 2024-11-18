@@ -68,7 +68,7 @@ var (
 		Usage: "What opcode to use for filling the stack with. These are all 2-gas ops: " +
 			"MSIZE(0x59), GAS(0x5A), RETURNDATASIZE(0x3D), ADDRESS(0x30), ORIGIN(0x32)," +
 			"CALLER(0x33), CALLVALUE(0x34), CALLDATASIZE(0x36), CODESIZE(0x38), GASPRICE(0x3A), COINBASE(0x41)," +
-			"TIMESTAMP(0x42), NUMBER(0x43), DIFFICULTY(0x44), GASLIMIT(0x45), " +
+			"TIMESTAMP(0x42), NUMBER(0x43), PREVRANDAO(0x44), GASLIMIT(0x45), " +
 			"CHAINID(0x46), BASEFEE(0x48)",
 	}
 	popFlag = &cli.IntFlag{
@@ -113,7 +113,7 @@ func evaluate(ctx *cli.Context) error {
 		pusher      = ctx.Int(pushFlag.Name)
 		popper      = ctx.Int(popFlag.Name)
 		// The attacker code
-		attackerAddr = common.HexToAddress("0x31337")
+		attackerAddr, _ = common.NewAddressFromString("Z0000000000000000000000000000000000031337")
 	)
 	ruleset, err := ops.LookupChainConfig(fork)
 	if err != nil {
@@ -238,7 +238,7 @@ func convertToStateTest(name, fork string, alloc core.GenesisAlloc, gasLimit uin
 		fuzzGenesisAlloc[k] = fuzzAcc
 	}
 	// Also add the sender
-	var sender = common.HexToAddress("a94f5374fce5edbc8e2a8697c15331677e6ebf0b")
+	var sender, _ = common.NewAddressFromString("Za94f5374fce5edbc8e2a8697c15331677e6ebf0b")
 	if _, ok := fuzzGenesisAlloc[sender]; !ok {
 		fuzzGenesisAlloc[sender] = fuzzing.GenesisAccount{
 			Balance: big.NewInt(1000000000000000000), // 1 eth
